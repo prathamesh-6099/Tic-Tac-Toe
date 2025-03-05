@@ -7,6 +7,11 @@ body{
     background-color: aqua;
     text-align: center;
 }
+
+div h1{
+    font-size: 50px;
+    margin: 10px;
+}
 .container{
     height: 70vh;
     display: flex;

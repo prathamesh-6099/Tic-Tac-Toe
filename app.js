@@ -20,6 +20,7 @@ const winpatterns = [
 ]
 const resetgame = () => {
     turno = true;
+    count = 0;
     enabledboxes();
     msgcontainer.classList.add("hide");
 }
@@ -27,7 +28,6 @@ const resetgame = () => {
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
         console.log("box was clicked");
-        // count++;
         if (turno) {
             box.innerHTML = "O"
             turno = false;
@@ -39,7 +39,13 @@ boxes.forEach((box) => {
 
         }
         box.disabled = true;
-        checkwinner();
+        count++;
+
+        let isWinner = checkwinner();
+
+        if (count === 9 && !isWinner) {
+            matchDraw();
+        }
 
     });
 })
@@ -56,12 +62,12 @@ const enabledboxes = () => {
     }
 }
 
-// const matchDraw = () => {
-//     msg.innerHTML = "Well Try Both of you match is Drawn";
-//     msgcontainer.classList.remove("hide");
-//     disabledboxes();
+const matchDraw = () => {
+    msg.innerHTML = "Well Try Both of you match is Drawn";
+    msgcontainer.classList.remove("hide");
+    disabledboxes();
 
-// }
+}
 const showwinner = (winner) => {
 
     msg.innerHTML = "Congratulations winner is " + winner;
@@ -78,11 +84,8 @@ const checkwinner = () => {
             if (pos1val === pos2val && pos2val === pos3val) {
                 console.log(pos1val, "are winner !!!!!")
                 showwinner(pos1val);
+                return true;
             }
-            // else if(count==9){
-            //     matchDraw();
-
-            // }
         }
     }
 }
